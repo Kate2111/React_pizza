@@ -1,5 +1,5 @@
 # React_pizza
-
+https://kate2111.github.io/React_pizza/
 
  стек:
 - ReactJS 18
