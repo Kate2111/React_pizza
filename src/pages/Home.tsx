@@ -1,21 +1,11 @@
 import Categories from '@/components/Categories'
 import Sort from '@/components/Sort'
-import PizzaBlock from '@/components/PizzaBlock'
 import { useState } from 'react'
 import { useFetching } from '@/hooks/useFetching'
 import { useFilterArray } from '@/hooks/useFilterArray'
-import MyLoader from '@/components/UI/MyLoader/MyLoader'
+import PaginatedItems from '@/components/PaginatedItems'
 
-interface PizzaType {
-    id: number;
-    imageUrl: string;
-    title: string;
-    types: number[];
-    sizes: number[];
-    price: number;
-    category: number;
-    rating: number;
-}
+
 
 const Home = () => {
     const [pizzaArray, setPizzaArray] = useState<any[]>([])
@@ -27,6 +17,7 @@ const Home = () => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     const filteredPizzaArray = useFilterArray(pizzaArray, selectedSort, activeIndex)
+
 
     return (
         <>
@@ -42,22 +33,16 @@ const Home = () => {
                 />
             </div>
             <h2 className="content__title">Все пиццы</h2>
-            <div className="content__items">
-                {
-                    isLoading
-                    ?
-                    ([...new Array(6)].map((_, index) => <MyLoader key={index}/>))
-                    :
-                    (filteredPizzaArray.map((item: PizzaType) => <PizzaBlock
-                                                        key={item.id}
-                                                        pizza={item}
-                                                        />)
-                    )
-                }
-            </div>
+            <PaginatedItems
+                itemsPerPage={4} 
+                filteredPizzaArray={filteredPizzaArray}
+                isLoading={isLoading}
+            />
+            
         </div>
         </>
     );
 };
 
 export default Home;
+

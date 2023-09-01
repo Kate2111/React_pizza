@@ -37,3 +37,14 @@ export const useFilterArray = (array: PizzaType[], sort: string, index: number) 
 
     return sortedAndFilterPizza
 }
+
+export const useSearchResult = (array: PizzaType[], sort: string, index: number,searchValue: string) => {
+    const filteredPizza = useFilterArray(array, sort, index);
+    const searchPizzaArray = useMemo( () => {
+        filteredPizza.filter( item => item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+    }
+    , [searchValue]);
+
+      
+    return searchPizzaArray
+}

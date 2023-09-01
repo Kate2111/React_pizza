@@ -1,5 +1,6 @@
 import logo from '../assets/pizza-logo.svg'
 import {Link} from 'react-router-dom'
+import MySeacrh from './UI/MySearch'
 
 const Header = () => {
     return (
@@ -13,6 +14,7 @@ const Header = () => {
                         <p>самая вкусная пицца во вселенной</p>
                         </div>
                     </Link>
+                    <MySeacrh/>
                     <div className="header__cart">
                         <Link to="/React_pizza/cart" className="button button--cart">
                             <span>520 ₽</span>
