@@ -6,7 +6,6 @@ import MyPagination from './UI/MyPagination';
 interface MyPaginationnProps {
     itemsPerPage: number,
     filteredPizzaArray: PizzaType[],
-    isLoading: boolean,
 }
 
 interface PizzaType {
@@ -20,7 +19,7 @@ interface PizzaType {
     rating: number;
 }
 
-const PaginatedItems: React.FC<MyPaginationnProps>  = ({itemsPerPage, filteredPizzaArray, isLoading}) => {
+const PaginatedItems: React.FC<MyPaginationnProps>  = ({itemsPerPage, filteredPizzaArray}) => {
     const [itemOffset, setItemOffset] = useState(0);
 
     const endOffset = itemOffset + itemsPerPage;
@@ -42,7 +41,6 @@ const PaginatedItems: React.FC<MyPaginationnProps>  = ({itemsPerPage, filteredPi
             />
 
             <PizzaItems 
-                isLoading={isLoading}
                 currentItems={currentItems}
             />
         </>

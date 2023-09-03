@@ -1,21 +1,21 @@
 import { getDataList } from '@/API/firebase'
 import { useEffect } from 'react'
-
-interface FetchingType {
-    setPizzaArray: (array: any[]) => void,
-    setIsLoading: (isLoading: boolean) => void,
-}
+import {  useDispatch } from 'react-redux'
+import { setPizzaArray } from '@/store/slice/pizzaSlice' 
+import { setIsLoading } from '@/store/slice/loadingSlice'
 
 
-export const useFetching = ({ setPizzaArray, setIsLoading }: FetchingType) => {
+export const useFetching = () => {
+    const dispatch = useDispatch()
+
     const fetchingPizza = async () => {
         const response = await getDataList('pizza')
-        setPizzaArray(response)
-        setIsLoading(false)
+        dispatch(setPizzaArray(response))
+        dispatch(setIsLoading(false))
     }
 
     useEffect(() => {
-        setIsLoading(true)
+        dispatch(setIsLoading(true))
         fetchingPizza();
         window.scrollTo(0, 0)
     }, [])

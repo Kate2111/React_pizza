@@ -15,8 +15,8 @@ function App() {
         <div className="content">
 
             <Routes>
-              <Route path='/React_pizza' element={<Home/>}/>
-              <Route path='/React_pizza/cart' element={<Cart/>}/>
+                <Route path='/React_pizza' element={<Home/>}/>
+                <Route path='/React_pizza/cart' element={<Cart/>}/>
             </Routes>
           
         </div>

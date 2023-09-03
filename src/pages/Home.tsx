@@ -1,5 +1,7 @@
 import Categories from '@/components/Categories'
 import Sort from '@/components/Sort'
+import type { RootState } from '@/store/store' 
+import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useFetching } from '@/hooks/useFetching'
 import { useFilterArray } from '@/hooks/useFilterArray'
@@ -8,10 +10,9 @@ import PaginatedItems from '@/components/PaginatedItems'
 
 
 const Home = () => {
-    const [pizzaArray, setPizzaArray] = useState<any[]>([])
-    const [isLoading, setIsLoading] = useState(true)
+    const pizzaArray = useSelector((state: RootState) => state.pizzas.pizzaArray)
 
-    useFetching({setPizzaArray, setIsLoading})
+    useFetching()
 
     const [selectedSort, setSelectedSort] = useState('')
     const [activeIndex, setActiveIndex] = useState(0)
@@ -36,7 +37,6 @@ const Home = () => {
             <PaginatedItems
                 itemsPerPage={4} 
                 filteredPizzaArray={filteredPizzaArray}
-                isLoading={isLoading}
             />
             
         </div>

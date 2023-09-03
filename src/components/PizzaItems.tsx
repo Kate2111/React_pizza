@@ -1,8 +1,9 @@
 import MyLoader from '@/components/UI/MyLoader/MyLoader'
 import PizzaBlock from '@/components/PizzaBlock'
+import type { RootState } from '@/store/store' 
+import { useSelector } from 'react-redux'
 
 interface PizzaItemsProps {
-    isLoading: boolean,
     currentItems: PizzaType[]
 }
 
@@ -17,7 +18,8 @@ interface PizzaType {
     rating: number;
 }
 
-const PizzaItems = ({isLoading, currentItems}: PizzaItemsProps) => {
+const PizzaItems = ({currentItems}: PizzaItemsProps) => {
+    const isLoading = useSelector((state: RootState) => state.loading.isLoading)
     
     return (
         <>
