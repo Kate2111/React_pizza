@@ -1,13 +1,10 @@
-import React from "react";
+import { setActiveCategoryIndex } from "@/store/slice/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/store";
 
-interface CategoriesProps {
-    activeIndex: Number,
-    onFilter: (index: number) => void
-}
-
-const Categories: React.FC<CategoriesProps> = ({activeIndex, onFilter}) => {
-    const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
-    
+const Categories = () => {
+    const {activeCategoryIndex , categories} = useSelector((state: RootState) => state.filter)
+    const dispatch = useDispatch()
 
     return (
         <>
@@ -16,8 +13,8 @@ const Categories: React.FC<CategoriesProps> = ({activeIndex, onFilter}) => {
                     {categories.map((category: string, index: number) => {
                         return <li 
                                     key={index}
-                                    className={activeIndex === index ? 'active' : ''}
-                                    onClick={() => onFilter(index)}
+                                    className={activeCategoryIndex === index ? 'active' : ''}
+                                    onClick={() => dispatch(setActiveCategoryIndex(index))}
                                 >
                                     {category}
                                 </li>

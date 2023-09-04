@@ -1,11 +1,11 @@
-import React from "react";
-interface SortProps {
-  value: string,
-  onChange: (sort: string) => void
-}
+import { setSelectedSort } from "@/store/slice/filterSlice";
+import type { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 
-const Sort: React.FC<SortProps> = ({value, onChange}) => {
+const Sort = () => {
+    const sortValue = useSelector((state: RootState) => state.filter.selectedSort)
+    const dispatch = useDispatch()
 
     return (
       <>
@@ -14,8 +14,8 @@ const Sort: React.FC<SortProps> = ({value, onChange}) => {
             <b>Сортировка по:</b>
             <select 
                 className="sort__popup"
-                value={value}
-                onChange={event => onChange(event.target.value)}
+                value={sortValue}
+                onChange={event => dispatch(setSelectedSort(event.target.value))}
             >
               <option value="rating" className="active">популярности</option>
               <option value="price up">цене ↑ </option> 

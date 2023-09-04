@@ -1,8 +1,14 @@
 import logo from '../assets/pizza-logo.svg'
 import {Link} from 'react-router-dom'
 import MySeacrh from './UI/MySearch'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+//import { setSearchValue } from '@/store/slice/filterSlice';
 
 const Header = () => {
+    const searchValue = useSelector((state: RootState) => state.filter.searchValue)
+    //const dispatch = useDispatch()
+
     return (
         <>
             <div className="header">
@@ -14,7 +20,9 @@ const Header = () => {
                         <p>самая вкусная пицца во вселенной</p>
                         </div>
                     </Link>
-                    <MySeacrh/>
+                    <MySeacrh
+                        searchValue={searchValue}
+                    />
                     <div className="header__cart">
                         <Link to="/React_pizza/cart" className="button button--cart">
                             <span>520 ₽</span>

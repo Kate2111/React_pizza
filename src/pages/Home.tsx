@@ -2,36 +2,23 @@ import Categories from '@/components/Categories'
 import Sort from '@/components/Sort'
 import type { RootState } from '@/store/store' 
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
-import { useFetching } from '@/hooks/useFetching'
-import { useFilterArray } from '@/hooks/useFilterArray'
+import { useSearchResult } from '@/hooks/useFilterArray'
 import PaginatedItems from '@/components/PaginatedItems'
 
 
 
 const Home = () => {
     const pizzaArray = useSelector((state: RootState) => state.pizzas.pizzaArray)
+    const { selectedSort, activeCategoryIndex, searchValue } = useSelector( (state: RootState) => state.filter)
 
-    useFetching()
-
-    const [selectedSort, setSelectedSort] = useState('')
-    const [activeIndex, setActiveIndex] = useState(0)
-
-    const filteredPizzaArray = useFilterArray(pizzaArray, selectedSort, activeIndex)
-
+    const filteredPizzaArray = useSearchResult(pizzaArray, selectedSort, activeCategoryIndex, searchValue)
 
     return (
         <>
         <div className="container">
             <div className="content__top">
-                <Categories 
-                    activeIndex={activeIndex}
-                    onFilter={setActiveIndex}
-                />
-                <Sort
-                    value={selectedSort}
-                    onChange={setSelectedSort}
-                />
+                <Categories/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <PaginatedItems

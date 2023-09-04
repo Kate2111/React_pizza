@@ -2,11 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 export interface PizzaState {
-  pizzaArray: any[]
+  pizzaArray: any[],
+  pizzaCount: number,
 }
 
 const initialState: PizzaState = {
   pizzaArray: [],
+  pizzaCount: 0
 }
 
 export const pizzaSlice = createSlice({
@@ -16,6 +18,7 @@ export const pizzaSlice = createSlice({
     setPizzaArray: (state, action) => {
         state.pizzaArray = action.payload;
     }
+
   },
 })
 

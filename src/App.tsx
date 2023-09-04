@@ -1,13 +1,14 @@
 //import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import '@/scss/app.scss'
+import { useFetching } from '@/hooks/useFetching'
 import Header from '@/components/Header'
 import Home from '@/pages/Home'
 import Cart from '@/pages/Cart'
 
 function App() {
   //const [ searchValue, setSearchValue] = useState('')
-  
+  useFetching()
   return (
     <>
       <div className="wrapper">

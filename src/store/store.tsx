@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import pizzaSlice from './slice/pizzaSlice'
 import loadingSlice from './slice/loadingSlice'
-import activeCategorySlice from './slice/activeCategorySlice'
+import filterSlice from './slice/filterSlice'
 
 export const store = configureStore({
   reducer: {
     pizzas: pizzaSlice,
     loading: loadingSlice,
-    categoryIndex: activeCategorySlice
+    filter: filterSlice
   },
 })
 

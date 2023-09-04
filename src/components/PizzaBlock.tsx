@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import MyButton from "./UI/MyButton/MyButton";
 
 interface PizzaType {
@@ -7,7 +7,7 @@ interface PizzaType {
     title: string;
     types: number[];
     sizes: number[];
-    price: number;
+    price: number[][];
     category: number;
     rating: number;
 }
@@ -20,7 +20,26 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
     const [pizzaCount, setPizzaCount] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
     const [activeType, setActiveType] = useState(0);
+    const [newPrice, setNewPrice] = useState(0);
+    
     const pizzaTypeName = ['тонкое', 'традиционное'];
+   
+    const initialPizzaPrice = useCallback(() => {
+        return pizza.price[activeType][activeSize];
+    }, [activeType, activeSize])
+
+    const actualPrice = initialPizzaPrice();
+
+    useEffect(() => {
+        pizzaCount ? setNewPrice(actualPrice * pizzaCount) : setNewPrice(actualPrice);
+        
+      }, [activeType, activeSize, actualPrice]);
+
+    const pizzaCountHandler = () => {
+        setPizzaCount(prev => prev + 1)
+
+        setNewPrice(actualPrice * (pizzaCount + 1))
+    }
     
     return (
         <div className="pizza-block">
@@ -59,8 +78,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от {pizza.price} ₽</div>
-                <MyButton onClick={() => setPizzaCount(pizzaCount + 1)}>{pizzaCount}</MyButton>
+                <div className="pizza-block__price">{newPrice} ₽</div>
+                <MyButton onClick={pizzaCountHandler}>{pizzaCount}</MyButton>
             </div>
         </div>
        
