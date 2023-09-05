@@ -13,7 +13,7 @@ interface PizzaType {
     title: string;
     types: number[];
     sizes: number[];
-    price: number;
+    price: number[][];
     category: number;
     rating: number;
 }
@@ -30,11 +30,11 @@ const PizzaItems = ({currentItems}: PizzaItemsProps) => {
                     ([...new Array(4)].map((_, index) => <MyLoader key={index}/>))
                     :
                     (
-                        currentItems.map((item: PizzaType) => <PizzaBlock
-                                                                    key={item.id}
-                                                                    pizza={item}
-                                                                />)
-                        
+                        currentItems.map(item => <PizzaBlock
+                                                    key={item.id}
+                                                    pizza={item}
+                                                />)
+        
                     )
                 }
             </div>

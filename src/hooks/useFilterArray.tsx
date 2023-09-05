@@ -6,7 +6,7 @@ interface PizzaType {
     title: string;
     types: number[];
     sizes: number[];
-    price: number;
+    price: number[][];
     category: number;
     rating: number;
 }
@@ -15,8 +15,9 @@ export const useSortedArray = (array: PizzaType[], sort: string) => {
     const sortedPizza = useMemo(() => {
         let sortedArray = [...array];
         
-        sort === 'price up' && sortedArray == sortedArray.sort((a, b) => a.price - b.price);
-        sort === ('price' || 'rating') && sortedArray == sortedArray.sort((a, b) => b[sort] - a[sort]);
+        sort === 'rating' && sortedArray == sortedArray.sort((a, b) => b[sort] - a[sort]);
+        sort === 'price up' && sortedArray == sortedArray.sort((a, b) => a.price[0][0] - b.price[0][0]);
+        sort === 'price' && sortedArray == sortedArray.sort((a, b) => a.price[0][0] - b.price[0][0]);
         sort === 'title' && sortedArray == sortedArray.sort((a, b) => a[sort].localeCompare(b[sort]));
 
         return sortedArray;

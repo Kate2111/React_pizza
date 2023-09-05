@@ -1,5 +1,12 @@
 import { useCallback, useState, useEffect } from "react";
 import MyButton from "./UI/MyButton/MyButton";
+import { useDispatch } from "react-redux";
+import { addItemCart } from "@/store/slice/cartSlice";
+
+interface PizzaBlockProps {
+    key: number;
+    pizza: PizzaType,
+}
 
 interface PizzaType {
     id: number;
@@ -11,10 +18,7 @@ interface PizzaType {
     category: number;
     rating: number;
 }
-  
-interface PizzaBlockProps {
-    pizza: PizzaType;
-}
+
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
     const [pizzaCount, setPizzaCount] = useState(0);
@@ -23,6 +27,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
     const [newPrice, setNewPrice] = useState(0);
     
     const pizzaTypeName = ['тонкое', 'традиционное'];
+
+    const dispatch = useDispatch();
    
     const initialPizzaPrice = useCallback(() => {
         return pizza.price[activeType][activeSize];
@@ -35,7 +41,19 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
         
       }, [activeType, activeSize, actualPrice]);
 
-    const pizzaCountHandler = () => {
+
+    const addItemCartHandler = () => {
+        const item = {
+            id: pizza.id,
+            imageUrl: pizza.imageUrl,
+            title: pizza.title,
+            type: pizzaTypeName[activeType],
+            size: activeSize,
+            price: actualPrice,
+        }
+
+        dispatch(addItemCart(item));
+
         setPizzaCount(prev => prev + 1)
 
         setNewPrice(actualPrice * (pizzaCount + 1))
@@ -79,7 +97,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">{newPrice} ₽</div>
-                <MyButton onClick={pizzaCountHandler}>{pizzaCount}</MyButton>
+                <MyButton onClick={addItemCartHandler}>{pizzaCount}</MyButton>
             </div>
         </div>
        

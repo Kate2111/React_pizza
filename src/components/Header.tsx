@@ -7,6 +7,7 @@ import { RootState } from '@/store/store';
 
 const Header = () => {
     const searchValue = useSelector((state: RootState) => state.filter.searchValue)
+    const { pizzaCount, totalPrice } = useSelector((state: RootState) => state.cart)
     //const dispatch = useDispatch()
 
     return (
@@ -25,7 +26,7 @@ const Header = () => {
                     />
                     <div className="header__cart">
                         <Link to="/React_pizza/cart" className="button button--cart">
-                            <span>520 ₽</span>
+                            <span>{totalPrice} ₽</span>
                             <div className="button__delimiter"></div>
                             <svg
                                 width="18"
@@ -56,7 +57,7 @@ const Header = () => {
                                 strokeLinejoin="round"
                                 />
                             </svg>
-                            <span>3</span>
+                            <span>{pizzaCount}</span>
                         </Link>
                     </div>
                 </div>
