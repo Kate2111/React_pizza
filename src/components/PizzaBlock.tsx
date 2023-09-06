@@ -1,7 +1,8 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import MyButton from "./UI/MyButton/MyButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemCart } from "@/store/slice/cartSlice";
+import { RootState } from "@/store/store";
 
 interface PizzaBlockProps {
     key: number;
@@ -21,42 +22,35 @@ interface PizzaType {
 
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
-    const [pizzaCount, setPizzaCount] = useState(0);
+    const dispatch = useDispatch();
+    const { cartArray } = useSelector((state: RootState) => state.cart)
+    const { pizzaSizeNumber, pizzaTypeName} = useSelector((state: RootState) => state.pizzas)
     const [activeSize, setActiveSize] = useState(0);
     const [activeType, setActiveType] = useState(0);
-    const [newPrice, setNewPrice] = useState(0);
-    
-    const pizzaTypeName = ['тонкое', 'традиционное'];
+    const nameActiveType = pizzaTypeName[activeType];
+    const numberActiveSize = pizzaSizeNumber[activeSize];
 
-    const dispatch = useDispatch();
-   
+    const pizzaId = pizza.id + nameActiveType + numberActiveSize;
+    const cartItem = cartArray.find(item => item.id === pizzaId)
+
+
     const initialPizzaPrice = useCallback(() => {
         return pizza.price[activeType][activeSize];
     }, [activeType, activeSize])
 
     const actualPrice = initialPizzaPrice();
 
-    useEffect(() => {
-        pizzaCount ? setNewPrice(actualPrice * pizzaCount) : setNewPrice(actualPrice);
-        
-      }, [activeType, activeSize, actualPrice]);
-
-
     const addItemCartHandler = () => {
         const item = {
-            id: pizza.id,
+            id: pizzaId,
             imageUrl: pizza.imageUrl,
             title: pizza.title,
-            type: pizzaTypeName[activeType],
-            size: activeSize,
+            type: nameActiveType,
+            size: numberActiveSize,
             price: actualPrice,
         }
 
         dispatch(addItemCart(item));
-
-        setPizzaCount(prev => prev + 1)
-
-        setNewPrice(actualPrice * (pizzaCount + 1))
     }
     
     return (
@@ -96,8 +90,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">{newPrice} ₽</div>
-                <MyButton onClick={addItemCartHandler}>{pizzaCount}</MyButton>
+                <div className="pizza-block__price">{cartItem ? cartItem.totalPriceItem : actualPrice} ₽</div>
+                <MyButton onClick={addItemCartHandler}>{cartItem ? cartItem.count : ''}</MyButton>
             </div>
         </div>
        

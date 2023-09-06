@@ -91,7 +91,7 @@ body {
 
   &--cart {
     max-width: 820px;
-    margin: 90px auto;
+    margin: calc(var(--index) * 5) auto;
     .content__title {
       margin: 0;
     }
@@ -323,19 +323,25 @@ body {
 
   &--empty {
     margin: 0 auto;
-    width: 560px;
+    width: calc(var(--index) * 35);
     text-align: center;
+    @media (max-width: 400px) {
+        width: calc(var(--index) * 25);
+    }
 
     h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
+        font-size: calc(var(--index) * 2);
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
     }
 
     p {
-      font-size: 18px;
-      line-height: 145.4%;
-      letter-spacing: 0.01em;
-      color: #777777;
+        font-size: calc(var(--index) * 1);
+        line-height: 145.4%;
+        letter-spacing: 0.01em;
+        color: #777777;
     }
 
     icon {
@@ -345,8 +351,8 @@ body {
 
     img {
       display: block;
-      width: 300px;
-      margin: 45px auto 60px;
+        width: 80%;
+        margin: calc(var(--index) * 2) auto calc(var(--index) * 4);
     }
 
     .button--black {

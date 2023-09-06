@@ -3,18 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export interface PizzaState {
   pizzaArray: any[],
-  pizzaSize: number,
-  pizzaType: number,
   pizzaTypeName: string[],
+  pizzaSizeNumber: number[],
   pizzaPrice: number,
 }
 
 const initialState: PizzaState = {
   pizzaArray: [],
-  pizzaSize: 0,
-  pizzaType: 0,
+  pizzaPrice: 0,
   pizzaTypeName: ['тонкое', 'традиционное'],
-  pizzaPrice: 0
+  pizzaSizeNumber: [ 26, 30, 40],
+  
 }
 
 export const pizzaSlice = createSlice({
@@ -23,18 +22,6 @@ export const pizzaSlice = createSlice({
   reducers: {
     setPizzaArray: (state, action) => {
         state.pizzaArray = action.payload;
-    },
-
-    setPizzaSize: (state, action) => {
-        state.pizzaSize = action.payload
-    },
-
-    setPizzaType: (state, action) => {
-        state.pizzaType = action.payload
-    },
-
-    setPizzaPrice: (state, action) => {
-        state.pizzaPrice = action.payload
     },
   },
 })

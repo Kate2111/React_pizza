@@ -21,7 +21,9 @@ const MyButton: React.FC<MyButtonProps> = ({children, onClick}) => {
                 />
             </svg>
             <span>Добавить</span>
-            <i>{children}</i>
+    
+            {children && <i>{children}</i>}
+            
         </button>
     );
 };
