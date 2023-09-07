@@ -19,14 +19,10 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 export const getDataList = async (recourse: string) => {
-  const recourseRef = ref(db, recourse);
-  try{
+    const recourseRef = ref(db, recourse);
     const data = await get(recourseRef);
     const recourseValue = data.val();
     return recourseValue;
-  } catch(err) {
-    console.error(err);
-  }
 }
 
 export const postDataList = async (recourse: string, elem: string, id: number) => {

@@ -8,7 +8,7 @@ import PaginatedItems from '@/components/PaginatedItems'
 
 
 const Home = () => {
-    const pizzaArray = useSelector((state: RootState) => state.pizzas.pizzaArray)
+    const { pizzaArray } = useSelector((state: RootState) => state.pizzas)
     const { selectedSort, activeCategoryIndex, searchValue } = useSelector( (state: RootState) => state.filter)
 
     const filteredPizzaArray = useSearchResult(pizzaArray, selectedSort, activeCategoryIndex, searchValue)
@@ -24,8 +24,7 @@ const Home = () => {
             <PaginatedItems
                 itemsPerPage={4} 
                 filteredPizzaArray={filteredPizzaArray}
-            />
-            
+            />          
         </div>
         </>
     );
