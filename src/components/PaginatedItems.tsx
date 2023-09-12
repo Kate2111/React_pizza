@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PizzaItems from '@/components/PizzaItems';
 import MyPagination from './UI/MyPagination';
 
+
 interface MyPaginationnProps {
     itemsPerPage: number,
     filteredPizzaArray: PizzaType[],

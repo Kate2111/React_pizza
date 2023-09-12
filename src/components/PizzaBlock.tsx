@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import MyButton from "./UI/MyButton/MyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemCart } from "@/store/slice/cartSlice";
@@ -32,7 +32,6 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
 
     const pizzaId = pizza.id + nameActiveType + numberActiveSize;
     const cartItem = cartArray.find(item => item.id === pizzaId)
-
 
     const initialPizzaPrice = useCallback(() => {
         return pizza.price[activeType][activeSize];

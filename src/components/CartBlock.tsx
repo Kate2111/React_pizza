@@ -1,22 +1,14 @@
 import { addItemCart, removeItemCart } from "@/store/slice/cartSlice";
 import { useDispatch } from "react-redux";
 import { minusItem } from "@/store/slice/cartSlice";
+import { TCartItem } from "@/types/types";
+
 
 interface CartItem {
-    cartItem: CartItemType
-}
-interface CartItemType {
-    key: number,
-    id: number,
-    imageUrl: string,
-    title: string,
-    type: string,
-    size: number,
-    count: number,
-    totalPriceItem: number
+    cartItem: TCartItem
 }
 
-const CartBlock = ({cartItem}: CartItem) => {
+const CartBlock: React.FC<CartItem> = ({cartItem}) => {
     const dispatch = useDispatch();
 
     return (

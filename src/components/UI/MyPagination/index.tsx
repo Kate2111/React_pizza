@@ -1,12 +1,9 @@
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 import style from './MyPagination.module.scss'
+import React from 'react';
 
 
-interface MyPaginationProps extends ReactPaginateProps{
-    pageCount: number
-}
-
-const MyPagination = ({onClick, pageCount}:MyPaginationProps) => {
+const MyPagination: React.FC<ReactPaginateProps> = ({onClick, pageCount}) => {
     return (
         <ReactPaginate
             className={style.root}

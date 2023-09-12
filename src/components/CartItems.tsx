@@ -4,7 +4,8 @@ import CartBlock from '@/components/CartBlock';
 import CartFooter from './CartFooter';
 import CartHeader from './CartHeader';
 
-const CartItems = () => {
+
+const CartItems: React.FC = () => {
     const { cartArray } = useSelector((state: RootState) => state.cart)
 
     return (
