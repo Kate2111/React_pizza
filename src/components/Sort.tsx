@@ -1,10 +1,9 @@
-import { setSelectedSort } from "@/store/slice/filterSlice";
-import type { RootState } from "@/store/store";
+import { filterState, setSelectedSort } from "@/store/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
 const Sort = () => {
-    const sortValue = useSelector((state: RootState) => state.filter.selectedSort)
+    const { selectedSort } = useSelector(filterState)
     const dispatch = useDispatch()
 
     return (
@@ -14,7 +13,7 @@ const Sort = () => {
             <b>Сортировка по:</b>
             <select 
                 className="sort__popup"
-                value={sortValue}
+                value={selectedSort}
                 onChange={event => dispatch(setSelectedSort(event.target.value))}
             >
               <option value="rating" className="active">популярности</option>

@@ -2,37 +2,24 @@
 import React, { useState } from 'react';
 import PizzaItems from '@/components/PizzaItems';
 import MyPagination from './UI/MyPagination';
+import { TPizzaItem } from '@/types/types';
 
-
-interface MyPaginationnProps {
+interface PaginationnProps {
     itemsPerPage: number,
-    filteredPizzaArray: PizzaType[],
+    filteredPizzaArray: TPizzaItem[],
 }
 
-interface PizzaType {
-    id: number;
-    imageUrl: string;
-    title: string;
-    types: number[];
-    sizes: number[];
-    price: number[][];
-    category: number;
-    rating: number;
-}
-
-const PaginatedItems: React.FC<MyPaginationnProps>  = ({itemsPerPage, filteredPizzaArray}) => {
-    const [itemOffset, setItemOffset] = useState(0);
+const PaginatedItems: React.FC<PaginationnProps>  = ({itemsPerPage, filteredPizzaArray}) => {
+    const [itemOffset, setItemOffset] = useState<number>(0);
 
     const endOffset = itemOffset + itemsPerPage;
     const currentItems = filteredPizzaArray.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(filteredPizzaArray.length / itemsPerPage);
 
-    const handlePageClick = (event: any) => {
-        const newOffset = (event.selected * itemsPerPage) % filteredPizzaArray.length;
+    const handlePageClick = (selectedItem: { selected: number }) => {
+        const newOffset = (selectedItem.selected * itemsPerPage) % filteredPizzaArray.length;
         setItemOffset(newOffset);
     };
-
-
 
     return (
         <>
@@ -45,7 +32,6 @@ const PaginatedItems: React.FC<MyPaginationnProps>  = ({itemsPerPage, filteredPi
                 currentItems={currentItems}
             />
         </>
-        
     );
 };
 

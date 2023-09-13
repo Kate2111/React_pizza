@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
 import CartBlock from '@/components/CartBlock';
 import CartFooter from './CartFooter';
 import CartHeader from './CartHeader';
+import { cartState } from '@/store/slice/cartSlice';
 
 
 const CartItems: React.FC = () => {
-    const { cartArray } = useSelector((state: RootState) => state.cart)
+    const { cartArray } = useSelector(cartState)
 
     return (
         <div className="content">
@@ -23,7 +23,6 @@ const CartItems: React.FC = () => {
                                             />
                                 })
                             }
-                            
                             <CartFooter/> 
                         </div>
                     </div>

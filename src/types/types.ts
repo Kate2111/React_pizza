@@ -1,4 +1,4 @@
-export interface IPizzaItem {
+export type TPizzaItem = {
     id: number;
     imageUrl: string;
     title: string;
@@ -10,12 +10,13 @@ export interface IPizzaItem {
 }
 
 export type TCartItem = {
-    key: number,
-    id: number,
+    //key: number,
+    id: string,
     imageUrl: string,
     title: string,
     type: string,
     size: number,
+    price: number,
     count: number,
     totalPriceItem: number
 }

@@ -1,15 +1,16 @@
 import Categories from '@/components/Categories'
 import Sort from '@/components/Sort'
-import type { RootState } from '@/store/store' 
 import { useSelector } from 'react-redux'
 import { useSearchResult } from '@/hooks/useFilterArray'
 import PaginatedItems from '@/components/PaginatedItems'
+import { pizzaState } from '@/store/slice/pizzaSlice'
+import { filterState } from '@/store/slice/filterSlice'
 
 
 
 const Home = () => {
-    const { pizzaArray } = useSelector((state: RootState) => state.pizzas)
-    const { selectedSort, activeCategoryIndex, searchValue } = useSelector( (state: RootState) => state.filter)
+    const { pizzaArray } = useSelector(pizzaState)
+    const { selectedSort, activeCategoryIndex, searchValue } = useSelector(filterState)
 
     const filteredPizzaArray = useSearchResult(pizzaArray, selectedSort, activeCategoryIndex, searchValue)
 

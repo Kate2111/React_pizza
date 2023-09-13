@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../store';
+import { TCartItem } from '@/types/types';
 
 interface CartState {
-  cartArray: any[],
+  cartArray: TCartItem[],
   pizzaCount: number,
   totalPrice: number,
 }
@@ -66,7 +68,7 @@ export const cartSlice = createSlice({
   },
 })
 
-
+export const cartState = (state: RootState) => state.cart
 export const {  addItemCart, minusItem, removeItemCart, clearItemsCart } = cartSlice.actions
 
 export default cartSlice.reducer

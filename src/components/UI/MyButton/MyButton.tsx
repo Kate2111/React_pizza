@@ -1,17 +1,17 @@
+import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { ReactComponent as PlusCart} from '@/components/UI/MyButton/plusCart.svg'
+
 
 interface MyButtonProps {
-    children: ReactNode;
-    onClick: () => void
+    icon?: ReactNode,
+    onClick: () => void,
+    style: string[]
 }
 
-const MyButton: React.FC<MyButtonProps> = ({children, onClick}) => {
+const MyButton: React.FC<MyButtonProps> = ({onClick, icon, style}) => {
     return (
-        <button className="button button--outline button--add"  onClick={onClick}>
-            <PlusCart/>
-            <span>Добавить</span>
-            {children && <i>{children}</i>}
+        <button className={classNames('button', 'button--outline', ...style)} onClick={onClick}>
+            { icon }
         </button>
     );
 };

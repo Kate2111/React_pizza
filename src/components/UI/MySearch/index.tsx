@@ -5,12 +5,11 @@ import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '@/store/slice/filterSlice';
 
-interface SearchType {
+interface SearchTypeProps {
     searchValue: string,
-    //setSearchValue: (value: string) => void
 }
 
-const MySeacrh = ({searchValue}: SearchType) => {
+const MySeacrh: React.FC<SearchTypeProps> = ({searchValue}) => {
     const dispatch = useDispatch()
     const inputRef = useRef<HTMLInputElement>(null);
 

@@ -1,6 +1,6 @@
 import cartEmpty from '../assets/empty-cart.png'
 
-const CartEmpty = () => {
+const CartEmpty: React.FC = () => {
     return (
             <div className="container container--cart">
                 <div className="cart cart--empty">
@@ -12,7 +12,7 @@ const CartEmpty = () => {
                     </p>
                     <img src={cartEmpty} alt="Empty cart" />
                     <a href="/" className="button button--black">
-                    <span>Вернуться назад</span>
+                        <span>Вернуться назад</span>
                     </a>
                 </div>
             </div>

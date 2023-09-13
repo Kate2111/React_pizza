@@ -1,17 +1,7 @@
+import { TPizzaItem } from '@/types/types';
 import { useMemo } from 'react'
 
-interface PizzaType {
-    id: number;
-    imageUrl: string;
-    title: string;
-    types: number[];
-    sizes: number[];
-    price: number[][];
-    category: number;
-    rating: number;
-}
-
-export const useSortedArray = (array: PizzaType[], sort: string) => {
+export const useSortedArray = (array: TPizzaItem[], sort: string) => {
     const sortedPizza = useMemo(() => {
         let sortedArray = [...array];
         
@@ -26,7 +16,7 @@ export const useSortedArray = (array: PizzaType[], sort: string) => {
     return sortedPizza
 }
 
-export const useFilterArray = (array: PizzaType[], sort: string, index: number) => {
+export const useFilterArray = (array: TPizzaItem[], sort: string, index: number) => {
     const sortedPizza = useSortedArray(array, sort);
     const sortedAndFilterPizza = useMemo( () => {
         if(index === 0) {
@@ -39,7 +29,7 @@ export const useFilterArray = (array: PizzaType[], sort: string, index: number) 
     return sortedAndFilterPizza
 }
 
-export const useSearchResult = (array: PizzaType[], sort: string, index: number,searchValue: string) => {
+export const useSearchResult = (array: TPizzaItem[], sort: string, index: number,searchValue: string) => {
     const filteredPizza = useFilterArray(array, sort, index);
     const searchPizzaArray = useMemo( () => {
         return filteredPizza.filter( item => item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))

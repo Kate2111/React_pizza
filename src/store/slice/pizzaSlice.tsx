@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getDataList } from '@/API/firebase'
+import { TPizzaItem } from '@/types/types';
+import { RootState } from '../store';
 
 
 export const fetchPizza = createAsyncThunk(
@@ -17,7 +19,7 @@ export const fetchPizza = createAsyncThunk(
 export interface PizzaState {
     loading: 'pending' | 'succeeded' | 'failed',
     error: string,
-    pizzaArray: any[],
+    pizzaArray: TPizzaItem[],
     pizzaTypeName: string[],
     pizzaSizeNumber: number[],
 }
@@ -50,5 +52,5 @@ export const pizzaSlice = createSlice({
     },
 })
 
-
+export const pizzaState = (state: RootState) => state.pizzas
 export default pizzaSlice.reducer

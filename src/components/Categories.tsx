@@ -1,9 +1,8 @@
-import { setActiveCategoryIndex } from "@/store/slice/filterSlice";
+import { filterState, setActiveCategoryIndex } from "@/store/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@/store/store";
 
-const Categories = () => {
-    const {activeCategoryIndex , categories} = useSelector((state: RootState) => state.filter)
+const Categories: React.FC = () => {
+    const {activeCategoryIndex , categories} = useSelector(filterState)
     const dispatch = useDispatch()
 
     return (

@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { cartState } from "@/store/slice/cartSlice";
+import { useNavigate } from 'react-router-dom';
 
-
-
-const CartFooter = () => {
-    const { pizzaCount, totalPrice } = useSelector((state: RootState) => state.cart)
+const CartFooter: React.FC = () => {
+    const { pizzaCount, totalPrice } = useSelector(cartState)
+    const navigate = useNavigate()
+    
 
     return (
         <div className="cart__bottom">
@@ -19,7 +20,7 @@ const CartFooter = () => {
                         <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
 
-                    <span>Вернуться назад</span>
+                    <span onClick={() => {navigate(-1)}}>Вернуться назад</span>
                 </a>
                 <div className="button pay-btn">
                     <span>Оплатить сейчас</span>
