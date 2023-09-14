@@ -1,8 +1,9 @@
+import React from "react";
 import { filterState, setSelectedSort } from "@/store/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const Sort = () => {
+const Sort: React.FC = React.memo(() => {
     const { selectedSort } = useSelector(filterState)
     const dispatch = useDispatch()
 
@@ -27,6 +28,6 @@ const Sort = () => {
       
         
     );
-};
+});
 
 export default Sort;

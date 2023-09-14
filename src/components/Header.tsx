@@ -1,16 +1,14 @@
 import logo from '../assets/pizza-logo.svg'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import MySeacrh from './UI/MySearch'
 import { useSelector } from 'react-redux';
-import { filterState } from '@/store/slice/filterSlice';
 import { cartState } from '@/store/slice/cartSlice';
 import { ReactComponent as Cart } from '@/assets/cart.svg'
 
 
 const Header: React.FC = () => {
-    const { searchValue } = useSelector(filterState)
     const { pizzaCount, totalPrice } = useSelector(cartState)
-
+    const location = useLocation();
 
     return (
         <>
@@ -23,9 +21,9 @@ const Header: React.FC = () => {
                             <p>самая вкусная пицца во вселенной</p>
                         </div>
                     </Link>
-                    <MySeacrh
-                        searchValue={searchValue}
-                    />
+                    
+                    { location.pathname !== '/React_pizza/cart' &&  <MySeacrh/>}
+                   
                     <div className="header__cart">
                         <Link to="/React_pizza/cart" className="button button--cart">
                             <span>{totalPrice} ₽</span>

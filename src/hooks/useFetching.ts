@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
-import {  useDispatch } from 'react-redux'
 import { fetchPizza } from '@/store/slice/pizzaSlice'
-import { AppDispatch } from '@/store/store'
+import { useAppDispatch } from '@/store/store'
 
 export const useFetching = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchPizza());
+        dispatch(fetchPizza('pizza'));
         window.scrollTo(0, 0)
     }, [])
 

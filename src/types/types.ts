@@ -10,7 +10,6 @@ export type TPizzaItem = {
 }
 
 export type TCartItem = {
-    //key: number,
     id: string,
     imageUrl: string,
     title: string,

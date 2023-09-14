@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getDataList } from '@/API/firebase'
 import { TPizzaItem } from '@/types/types';
 import { RootState } from '../store';
 
 
-export const fetchPizza = createAsyncThunk(
+export const fetchPizza = createAsyncThunk<TPizzaItem[], string>(
     'pizza/fetchPizzaStatus',
-    async () => {
-      const response = await getDataList('pizza');
+    async (recourse) => {
+      const response = await getDataList(recourse);
       if (response === null) {
         throw new Error('Произошла ошибка. Проверь URL');
       }
-      return response
+      return response 
     }
 )
 
@@ -41,7 +41,7 @@ export const pizzaSlice = createSlice({
         .addCase(fetchPizza.pending, (state) => {
             state.loading = 'pending';
         })
-        .addCase(fetchPizza.fulfilled, (state, action) => {
+        .addCase(fetchPizza.fulfilled, (state, action: PayloadAction<TPizzaItem[]>) => {
             state.loading = 'succeeded';
             state.pizzaArray = action.payload;
         })

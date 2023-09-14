@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemCart, cartState } from "@/store/slice/cartSlice";
 import { TCartItem, TPizzaItem } from "@/types/types";
 import { pizzaState } from "@/store/slice/pizzaSlice";
+import { useSeLocalStorage } from "@/hooks/useSetLocalStorage";
 
 interface PizzaBlockProps {
     key: number;
@@ -21,6 +22,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
 
     const pizzaId = pizza.id + nameActiveType + numberActiveSize;
     const cartItem = cartArray.find(item => item.id === pizzaId)
+  
+    console.log(pizzaId, activeType, activeSize)
 
     const initialPizzaPrice = useCallback(() => {
         return pizza.price[activeType][activeSize];
@@ -42,6 +45,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
 
         dispatch(addItemCart(item));
     }
+
+    useSeLocalStorage(cartArray, 'cart')
     
     return (
         <div className="pizza-block">
@@ -60,7 +65,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
                                         className={activeType === typeId ? 'active' : ''}
                                         onClick={() => setActiveType(typeId)}
                                     >
-                                        {pizzaTypeName[typeId]}
+                                        {!cartItem ?pizzaTypeName[typeId] : cartItem.type}
                                     </li>
                         })
                     }
@@ -73,7 +78,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
                                         className={activeSize === index ? 'active' : ''}
                                         onClick={() => setActiveSize(index)}
                                     >
-                                        {size}
+                                        {!cartItem ? size : cartItem.size}
                                     </li>
                         })
                     }

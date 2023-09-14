@@ -6,8 +6,6 @@ import PaginatedItems from '@/components/PaginatedItems'
 import { pizzaState } from '@/store/slice/pizzaSlice'
 import { filterState } from '@/store/slice/filterSlice'
 
-
-
 const Home = () => {
     const { pizzaArray } = useSelector(pizzaState)
     const { selectedSort, activeCategoryIndex, searchValue } = useSelector(filterState)

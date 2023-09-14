@@ -1,20 +1,31 @@
 import style from './MySearch.module.scss'
 import search from './search.svg'
 import close from './close.svg'
-import { useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '@/store/slice/filterSlice';
+import debounce from 'lodash.debounce'
 
-interface SearchTypeProps {
-    searchValue: string,
-}
-
-const MySeacrh: React.FC<SearchTypeProps> = ({searchValue}) => {
+const MySeacrh: React.FC = () => {
     const dispatch = useDispatch()
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null)
+    const [value, setValue] = useState<string>('')
 
-    const searchHandler = () => {
-        dispatch(setSearchValue(''))
+    const updateValueSearch = useCallback(
+        debounce((str: string)=>{
+            dispatch(setSearchValue(str))
+        }, 1000),
+        []
+    )
+
+    const changeValueHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+        updateValueSearch(event.target.value)
+    }
+
+    const removeSearchHandler = () => {
+        setValue('');
+        dispatch(setSearchValue(''));
         inputRef.current?.focus()
     }
 
@@ -30,15 +41,15 @@ const MySeacrh: React.FC<SearchTypeProps> = ({searchValue}) => {
                 ref={inputRef}
                 className={style.input} 
                 placeholder='Поиск пиццы...'
-                value={searchValue}
-                onChange={event =>  dispatch(setSearchValue(event.target.value))}
+                value={value}
+                onChange={event =>  changeValueHandler(event)}
             />
 
             <img 
                 className={style.clearIcon} 
                 src={close} 
                 alt="close" 
-                onClick={searchHandler}
+                onClick={removeSearchHandler}
             />
         </div>
         

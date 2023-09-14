@@ -1,9 +1,13 @@
 import { filterState, setActiveCategoryIndex } from "@/store/slice/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback } from "react";
 
-const Categories: React.FC = () => {
+const Categories: React.FC = React.memo(() => {
     const {activeCategoryIndex , categories} = useSelector(filterState)
     const dispatch = useDispatch()
+    const getActiveCategoryHandler = useCallback((index: number) => {
+        dispatch(setActiveCategoryIndex(index))
+    }, [])
 
     return (
         <>
@@ -13,7 +17,7 @@ const Categories: React.FC = () => {
                         return <li 
                                     key={index}
                                     className={activeCategoryIndex === index ? 'active' : ''}
-                                    onClick={() => dispatch(setActiveCategoryIndex(index))}
+                                    onClick={() => getActiveCategoryHandler(index)}
                                 >
                                     {category}
                                 </li>
@@ -22,6 +26,6 @@ const Categories: React.FC = () => {
             </div>
         </>
     );
-};
+});
 
 export default Categories;
