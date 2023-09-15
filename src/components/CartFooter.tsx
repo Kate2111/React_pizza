@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { cartState } from "@/store/slice/cartSlice";
 import { useNavigate } from 'react-router-dom';
+import MyButton from './UI/MyButton/MyButton';
+import { ReactComponent as GoBack } from '@/assets/btnGoBack.svg'
 
 const CartFooter: React.FC = () => {
     const { pizzaCount, totalPrice } = useSelector(cartState)
@@ -15,16 +17,17 @@ const CartFooter: React.FC = () => {
             </div>
         
             <div className="cart__bottom-buttons">
-                <a href="/" className="button button--outline button--add go-back-btn">
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-
-                    <span onClick={() => {navigate(-1)}}>Вернуться назад</span>
-                </a>
-                <div className="button pay-btn">
+                <MyButton 
+                    style={['button--add', 'go-back-btn']} 
+                    icon={<GoBack/>} 
+                    onClick={() => {navigate(-1)}}
+                >
+                    Вернуться назад
+                </MyButton>
+            
+                <button className="button pay-btn">
                     <span>Оплатить сейчас</span>
-                </div>
+                </button>
             </div>
         </div>
     );

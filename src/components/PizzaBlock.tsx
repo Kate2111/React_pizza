@@ -65,7 +65,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({pizza}) => {
                                         className={activeType === typeId ? 'active' : ''}
                                         onClick={() => setActiveType(typeId)}
                                     >
-                                        {!cartItem ?pizzaTypeName[typeId] : cartItem.type}
+                                        {pizzaTypeName[typeId]}
                                     </li>
                         })
                     }
