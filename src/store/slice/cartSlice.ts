@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { TCartItem } from '@/types/types';
-import { cartTotalPrice } from '@/utils/cartTotalPrice';
-import { cartPizzaCount } from '@/utils/cartPizzaCount';
-import { getCartItemsFromLS } from '@/utils/getCartItemsFromLS';
+import { cartTotalPrice } from '@/utils/price/cartTotalPrice';
+import { cartPizzaCount } from '@/utils/count/cartPizzaCount';
+import { getCartItemsFromLS } from '@/utils/localStorage/getCartItemsFromLS';
 
 interface CartState {
   cartArray: TCartItem[],

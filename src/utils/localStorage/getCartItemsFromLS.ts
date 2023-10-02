@@ -1,5 +1,5 @@
-import { cartPizzaCount } from "./cartPizzaCount";
-import { cartTotalPrice } from "./cartTotalPrice";
+import { cartPizzaCount } from "../count/cartPizzaCount";
+import { cartTotalPrice } from "../price/cartTotalPrice";
 
 export const getCartItemsFromLS = () => {
     const data = localStorage.getItem('cart');
